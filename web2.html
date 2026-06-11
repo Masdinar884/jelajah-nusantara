@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jelajah Nusantara — Wisata Indonesia</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #F0D898;
+    --dark: #1A1208;
+    --dark2: #2E2010;
+    --warm: #5C3D1E;
+    --cream: #FBF5E6;
+    --cream2: #F2E8D0;
+    --text: #2C1A08;
+    --muted: #7A6048;
+    --green: #2D5016;
+    --sea: #1A4A5C;
+    --red: #8B2020;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 4rem;
+    background: rgba(26,18,8,0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(201,168,76,0.3);
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    color: var(--gold);
+    letter-spacing: 0.02em;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--cream2);
+    text-decoration: none;
+    font-size: 0.88rem;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--gold); }
+
+  .nav-cta {
+    background: var(--gold);
+    color: var(--dark) !important;
+    padding: 0.5rem 1.4rem;
+    border-radius: 2px;
+    font-weight: 500 !important;
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    background: 
+      linear-gradient(to bottom, rgba(26,18,8,0.5) 0%, rgba(26,18,8,0.2) 40%, rgba(26,18,8,0.7) 100%),
+      url('https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=1600') center/cover no-repeat;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0 4rem 5rem;
+    position: relative;
+  }
+
+  .hero-tag {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 7vw, 6.5rem);
+    color: #fff;
+    line-height: 1.05;
+    max-width: 700px;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--gold-light);
+  }
+
+  .hero-sub {
+    color: rgba(255,255,255,0.75);
+    font-size: 1.1rem;
+    font-weight: 300;
+    max-width: 480px;
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+  }
+
+  .hero-btns {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  .btn-primary {
+    background: var(--gold);
+    color: var(--dark);
+    padding: 0.9rem 2.2rem;
+    border: none;
+    border-radius: 2px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: background 0.2s;
+  }
+
+  .btn-primary:hover { background: var(--gold-light); }
+
+  .btn-ghost {
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.5);
+    padding: 0.9rem 2.2rem;
+    border-radius: 2px;
+    font-size: 0.9rem;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: border-color 0.2s, color 0.2s;
+  }
+
+  .btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 2rem;
+    right: 4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    color: rgba(255,255,255,0.5);
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 50px;
+    background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.5));
+    animation: scrollLine 2s ease-in-out infinite;
+  }
+
+  @keyframes scrollLine {
+    0%, 100% { transform: scaleY(0.3); opacity: 0.3; }
+    50% { transform: scaleY(1); opacity: 1; }
+  }
+
+  /* STATS STRIP */
+  .stats-strip {
+    background: var(--dark);
+    padding: 2rem 4rem;
+    display: flex;
+    justify-content: space-around;
+    border-bottom: 1px solid rgba(201,168,76,0.2);
+  }
+
+  .stat-item {
+    text-align: center;
+  }
+
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    color: var(--gold);
+  }
+
+  .stat-label {
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-top: 0.25rem;
+  }
+
+  /* SECTION COMMONS */
+  section { padding: 6rem 4rem; }
+
+  .section-tag {
+    font-size: 0.72rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.75rem;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    color: var(--dark);
+    line-height: 1.15;
+    margin-bottom: 1rem;
+  }
+
+  .section-title em { font-style: italic; color: var(--warm); }
+
+  .section-desc {
+    color: var(--muted);
+    font-size: 1rem;
+    font-weight: 300;
+    line-height: 1.8;
+    max-width: 520px;
+  }
+
+  /* DESTINATIONS */
+  .destinations { background: var(--cream); }
+
+  .dest-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 3rem;
+  }
+
+  .dest-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-rows: 320px 220px;
+    gap: 1rem;
+  }
+
+  .dest-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .dest-card:nth-child(1) { grid-row: 1 / 3; }
+
+  .dest-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+  }
+
+  .dest-card:hover img { transform: scale(1.06); }
+
+  .dest-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(26,18,8,0.8) 0%, transparent 50%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 1.5rem;
+  }
+
+  .dest-region {
+    font-size: 0.68rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.4rem;
+  }
+
+  .dest-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    color: #fff;
+  }
+
+  .dest-card:nth-child(1) .dest-name { font-size: 2rem; }
+
+  .dest-desc {
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.7);
+    margin-top: 0.4rem;
+    line-height: 1.5;
+  }
+
+  /* EXPERIENCES */
+  .experiences { background: var(--dark); }
+
+  .experiences .section-title { color: var(--cream); }
+  .experiences .section-desc { color: rgba(255,255,255,0.5); }
+  .experiences .section-tag { color: var(--gold); }
+
+  .exp-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 3rem;
+  }
+
+  .exp-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+  }
+
+  .exp-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(201,168,76,0.15);
+    border-radius: 4px;
+    padding: 2rem 1.5rem;
+    transition: border-color 0.3s, background 0.3s;
+    cursor: pointer;
+  }
+
+  .exp-card:hover {
+    border-color: var(--gold);
+    background: rgba(201,168,76,0.06);
+  }
+
+  .exp-icon {
+    font-size: 2rem;
+    margin-bottom: 1.2rem;
+    display: block;
+  }
+
+  .exp-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    color: var(--cream);
+    margin-bottom: 0.75rem;
+  }
+
+  .exp-card p {
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.45);
+    line-height: 1.7;
+  }
+
+  /* FEATURED */
+  .featured {
+    background: var(--cream2);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+  }
+
+  .featured-img {
+    position: relative;
+  }
+
+  .featured-img img {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+    border-radius: 4px;
+  }
+
+  .featured-badge {
+    position: absolute;
+    bottom: -1.5rem;
+    right: -1.5rem;
+    width: 120px;
+    height: 120px;
+    background: var(--gold);
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 0.85rem;
+    color: var(--dark);
+    text-align: center;
+    line-height: 1.3;
+    border: 4px solid var(--cream2);
+  }
+
+  .featured-badge strong { font-size: 1.6rem; display: block; }
+
+  .featured-content .section-tag { margin-bottom: 1rem; }
+
+  .feature-list {
+    list-style: none;
+    margin: 2rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .feature-list li {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.9rem;
+    color: var(--muted);
+  }
+
+  .feature-list li::before {
+    content: '';
+    width: 20px;
+    height: 1px;
+    background: var(--gold);
+    flex-shrink: 0;
+  }
+
+  /* GALLERY */
+  .gallery { background: var(--cream); }
+
+  .gallery-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .gallery-header .section-desc {
+    margin: 0 auto;
+  }
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 200px 200px;
+    gap: 0.75rem;
+  }
+
+  .gallery-item {
+    overflow: hidden;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .gallery-item:nth-child(1) { grid-column: span 2; grid-row: span 2; }
+  .gallery-item:nth-child(4) { grid-column: span 2; }
+
+  .gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+  }
+
+  .gallery-item:hover img { transform: scale(1.06); }
+
+  /* TESTIMONIALS */
+  .testimonials {
+    background: var(--dark2);
+    text-align: center;
+    padding: 6rem 4rem;
+  }
+
+  .testimonials .section-tag { justify-content: center; display: block; }
+  .testimonials .section-title { color: var(--cream); text-align: center; }
+
+  .testi-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-top: 3rem;
+    text-align: left;
+  }
+
+  .testi-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(201,168,76,0.1);
+    border-radius: 4px;
+    padding: 2rem;
+  }
+
+  .testi-stars {
+    color: var(--gold);
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
+    letter-spacing: 0.1em;
+  }
+
+  .testi-text {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1rem;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+  }
+
+  .testi-author {
+    font-size: 0.8rem;
+    color: var(--gold);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* CTA */
+  .cta-section {
+    background: 
+      linear-gradient(rgba(26,18,8,0.75), rgba(26,18,8,0.75)),
+      url('https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=1600') center/cover;
+    padding: 8rem 4rem;
+    text-align: center;
+  }
+
+  .cta-section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 4rem);
+    color: #fff;
+    margin-bottom: 1rem;
+  }
+
+  .cta-section h2 em { font-style: italic; color: var(--gold-light); }
+
+  .cta-section p {
+    color: rgba(255,255,255,0.65);
+    font-size: 1.05rem;
+    font-weight: 300;
+    max-width: 500px;
+    margin: 0 auto 2.5rem;
+    line-height: 1.7;
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--dark);
+    padding: 4rem 4rem 2rem;
+    border-top: 1px solid rgba(201,168,76,0.15);
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 3rem;
+    margin-bottom: 3rem;
+  }
+
+  .footer-brand .nav-logo { font-size: 1.8rem; }
+
+  .footer-brand p {
+    color: rgba(255,255,255,0.4);
+    font-size: 0.85rem;
+    line-height: 1.7;
+    margin-top: 1rem;
+    max-width: 260px;
+  }
+
+  .footer-col h4 {
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.2rem;
+  }
+
+  .footer-col ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .footer-col ul li a {
+    color: rgba(255,255,255,0.45);
+    text-decoration: none;
+    font-size: 0.88rem;
+    transition: color 0.2s;
+  }
+
+  .footer-col ul li a:hover { color: var(--gold); }
+
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding-top: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-bottom p {
+    color: rgba(255,255,255,0.3);
+    font-size: 0.8rem;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-tag, .hero h1, .hero-sub, .hero-btns {
+    animation: fadeUp 0.8s ease forwards;
+  }
+
+  .hero h1 { animation-delay: 0.15s; opacity: 0; }
+  .hero-sub { animation-delay: 0.3s; opacity: 0; }
+  .hero-btns { animation-delay: 0.45s; opacity: 0; }
+
+  /* SEARCH BAR */
+  .search-bar {
+    position: absolute;
+    bottom: -2.5rem;
+    left: 4rem;
+    right: 4rem;
+    background: #fff;
+    border-radius: 4px;
+    display: flex;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.15);
+    overflow: hidden;
+    border: 1px solid rgba(201,168,76,0.2);
+  }
+
+  .search-field {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 1.5rem;
+    border-right: 1px solid #f0e8d0;
+  }
+
+  .search-field:last-child { border-right: none; }
+
+  .search-field label {
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.25rem;
+  }
+
+  .search-field span {
+    font-size: 0.9rem;
+    color: var(--text);
+    font-weight: 400;
+  }
+
+  .search-btn {
+    background: var(--gold);
+    color: var(--dark);
+    border: none;
+    padding: 0 2rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s;
+    white-space: nowrap;
+  }
+
+  .search-btn:hover { background: var(--gold-light); }
+
+  .hero-bottom {
+    position: relative;
+    padding-bottom: 3.5rem;
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Jelajah Nusantara</div>
+  <ul class="nav-links">
+    <li><a href="#destinasi">Destinasi</a></li>
+    <li><a href="#pengalaman">Pengalaman</a></li>
+    <li><a href="#galeri">Galeri</a></li>
+    <li><a href="#tentang">Tentang</a></li>
+    <li><a href="#kontak" class="nav-cta">Hubungi Kami</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="beranda">
+  <div class="hero-tag">✦ Selamat Datang di Surga Dunia</div>
+  <h1>Jelajahi <em>Keindahan</em><br>Nusantara</h1>
+  <p class="hero-sub">Dari sabang sampai merauke, temukan 17.000 pulau penuh keajaiban, budaya yang kaya, dan kenangan tak terlupakan.</p>
+  <div class="hero-btns">
+    <a href="#destinasi" class="btn-primary">Mulai Perjalanan</a>
+    <a href="#galeri" class="btn-ghost">Lihat Galeri</a>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    Scroll
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-strip">
+  <div class="stat-item">
+    <div class="stat-num">17.508</div>
+    <div class="stat-label">Pulau</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">300+</div>
+    <div class="stat-label">Suku Bangsa</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">9</div>
+    <div class="stat-label">Situs Warisan UNESCO</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">1.340+</div>
+    <div class="stat-label">Suku & Bahasa</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">54.7jt</div>
+    <div class="stat-label">Hektar Hutan Tropis</div>
+  </div>
+</div>
+
+<!-- DESTINATIONS -->
+<section class="destinations" id="destinasi">
+  <div class="dest-header">
+    <div>
+      <div class="section-tag">✦ Jelajahi Destinasi</div>
+      <h2 class="section-title">Pilihan <em>Terbaik</em><br>Untuk Anda</h2>
+    </div>
+    <div>
+      <p class="section-desc">Setiap sudut Indonesia menyimpan pesona yang berbeda. Temukan destinasi impian Anda.</p>
+    </div>
+  </div>
+
+  <div class="dest-grid">
+    <div class="dest-card">
+      <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=800" alt="Bali">
+      <div class="dest-overlay">
+        <div class="dest-region">Bali · Provinsi Bali</div>
+        <div class="dest-name">Pulau Dewata Bali</div>
+        <div class="dest-desc">Harmoni antara alam, seni, dan spiritualitas dalam satu pulau yang memukau dunia.</div>
+      </div>
+    </div>
+    <div class="dest-card">
+      <img src="https://7summitstravel.com/public/uploads/news-538.jpg" alt="Raja Ampat">
+      <div class="dest-overlay">
+        <div class="dest-region">Papua Barat</div>
+        <div class="dest-name">Raja Ampat</div>
+        <div class="dest-desc">Surga bawah laut terkaya di dunia.</div>
+      </div>
+    </div>
+    <div class="dest-card">
+      <img src="https://travelgo.id/wp-content/uploads/2025/08/liburan-murah-labuan-bajo.jpg" alt="Labuan Bajo">
+      <div class="dest-overlay">
+        <div class="dest-region">Nusa Tenggara Timur</div>
+        <div class="dest-name">Labuan Bajo</div>
+        <div class="dest-desc">Gerbang menuju Taman Nasional Komodo.</div>
+      </div>
+    </div>
+    <div class="dest-card">
+      <img src="https://img.okezone.com/content/2024/03/13/406/2982845/pernah-jadi-ibu-kota-negara-indonesia-inilah-5-fakta-menarik-yogyakarta-9yv1UaPH8Y.JPG" alt="Yogyakarta">
+      <div class="dest-overlay">
+        <div class="dest-region">Daerah Istimewa Yogyakarta</div>
+        <div class="dest-name">Yogyakarta</div>
+        <div class="dest-desc">kota ini memadukan pesona sejarah, kekayaan destinasi wisata, dan atmosfer akademis..</div>
+      </div>
+    </div>
+    <div class="dest-card">
+      <img src="https://www.zubludiving.com/images/Indonesia/Lombok/Gili-Islands/Gili-Islands-Scuba-Diving-Trawangan-Air-Lombok-Banner.jpg" alt="Lombok">
+      <div class="dest-overlay">
+        <div class="dest-region">Nusa Tenggara Barat</div>
+        <div class="dest-name">Lombok & Gili</div>
+      <div class="dest-desc">surga tropis di Nusa Tenggara Barat yang menawarkan pesona alam menakjubkan</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCES -->
+<section class="experiences" id="pengalaman">
+  <div class="exp-header">
+    <div>
+      <div class="section-tag">✦ Jenis Pengalaman</div>
+      <h2 class="section-title" style="color: var(--cream);">Pengalaman <em>Tak Terlupakan</em></h2>
+    </div>
+    <p class="section-desc">Lebih dari sekedar perjalanan — sebuah transformasi jiwa.</p>
+  </div>
+
+  <div class="exp-grid">
+    <div class="exp-card">
+      <span class="exp-icon">🌊</span>
+      <h3>Petualangan Laut</h3>
+      <p>Selami keindahan bawah laut Indonesia dengan snorkeling, diving, dan island hopping di perairan paling bening di dunia.</p>
+    </div>
+    <div class="exp-card">
+      <span class="exp-icon">🌋</span>
+      <h3>Alam & Pendakian</h3>
+      <p>Daki gunung berapi aktif, jelajahi hutan tropis purba, dan saksikan matahari terbit dari puncak-puncak tertinggi nusantara.</p>
+    </div>
+    <div class="exp-card">
+      <span class="exp-icon">🎭</span>
+      <h3>Budaya & Tradisi</h3>
+      <p>Saksikan upacara adat, pelajari seni batik, gamelan, dan wayang yang telah diakui UNESCO sebagai warisan dunia.</p>
+    </div>
+    <div class="exp-card">
+      <span class="exp-icon">🍜</span>
+      <h3>Kuliner Nusantara</h3>
+      <p>Nikmati lebih dari 5.000 hidangan tradisional yang kaya rempah, dari rendang Padang hingga papeda khas Papua.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED -->
+<section class="featured" id="tentang">
+  <div class="featured-img">
+    <img src="https://www.indonesia.travel/contentassets/ea5919f254c2494c9579fa4ce3522bcb/candi-borobudur-1.jpeg" alt="Borobudur">
+    <div class="featured-badge">
+      <strong>#1</strong>
+      Wisata<br>Asia
+    </div>
+  </div>
+  <div class="featured-content">
+    <div class="section-tag">✦ Mengapa Indonesia</div>
+    <h2 class="section-title">Negeri Seribu <em>Keajaiban</em></h2>
+    <p class="section-desc">Indonesia bukan sekadar destinasi wisata — ini adalah pengalaman yang mengubah cara pandang Anda tentang dunia. Setiap kunjungan selalu ada yang baru untuk ditemukan.</p>
+    <ul class="feature-list">
+      <li>9 Situs Warisan Budaya & Alam UNESCO</li>
+      <li>Biodiversitas terkaya ke-2 di dunia</li>
+      <li>Lebih dari 700 bahasa daerah</li>
+      <li>Pantai terbaik versi berbagai media internasional</li>
+      <li>Keramahan penduduk lokal yang tulus</li>
+    </ul>
+    <a href="#destinasi" class="btn-primary" style="margin-top: 0.5rem;">Mulai Jelajahi</a>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery" id="galeri">
+  <div class="gallery-header">
+    <div class="section-tag">✦ Galeri</div>
+    <h2 class="section-title">Potret <em>Keindahan</em> Nusantara</h2>
+    <p class="section-desc">Setiap foto bercerita tentang keajaiban yang menanti Anda.</p>
+  </div>
+
+  <div class="gallery-grid">
+    <div class="gallery-item">
+      <img src="https://i2.wp.com/blog.tripcetera.com/id/wp-content/uploads/2020/10/pulau-padar.jpg" alt="Alam Indonesia">
+    </div>
+    <div class="gallery-item">
+      <img src="https://partners.wsj.com/bkpm/bridge-to-the-future/wp-content/uploads/sites/919/2022/08/3c49483b-f6f9-476e-a8d6-fbc26fe22930.jpeg?strip=info&w=1440&zoom=2" alt="Budaya">
+    </div>
+    <div class="gallery-item">
+      <img src="https://statik.tempo.co/data/2021/07/24/id_1037336/1037336_720.jpg" alt="Pantai">
+    </div>
+    <div class="gallery-item">
+      <img src="https://dinosgrow.com/wp-content/uploads/2024/10/Artikel-1-1024x640.png" alt="Hutan">
+    </div>
+    <div class="gallery-item">
+      <img src="https://www.eigeradventure.com/blog/wp-content/uploads/2024/06/gunung-terindah-di-indonesia-12.jpg" alt="Gunung">
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <div class="section-tag">✦ Cerita Mereka</div>
+  <h2 class="section-title">Yang Berkesan bagi <em>Mereka</em></h2>
+  
+  <div class="testi-grid">
+    <div class="testi-card">
+      <div class="testi-stars">★ ★ ★ ★ ★</div>
+      <p class="testi-text">"Bali mengubah hidup saya. Ketenangan pura-puranya dan kehangatan masyarakatnya membuat saya ingin kembali lagi dan lagi."</p>
+      <div class="testi-author">MUH.ILHAM · SUKOHARJO</div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-stars">★ ★ ★ ★ ★</div>
+      <p class="testi-text">"Raja Ampat adalah surga menyelam terbaik yang pernah saya kunjungi. Keanekaragaman hayati bawah lautnya luar biasa dan tak tertandingi."</p>
+      <div class="testi-author">DINAR RAMADANI · CANGAKAN</div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-stars">★ ★ ★ ★ ★</div>
+      <p class="testi-text">"Borobudur saat fajar adalah pengalaman indah yang tidak akan pernah saya lupakan. Indonesia adalah permata tersembunyi Asia Tenggara."</p>
+      <div class="testi-author">Nukman Fahri · Karangpandan </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="kontak">
+  <h2>Siap <em>Menjelajahi</em><br>Indonesia?</h2>
+  <p>Biarkan kami memandu perjalanan impian Anda. Konsultasikan rencana wisata Anda bersama tim ahli kami.</p>
+  <div style="display: flex; gap: 1rem; justify-content: center;">
+    <a href="mailto:info@jelajahnusantara.id" class="btn-primary">Hubungi Kami</a>
+    <a href="#destinasi" class="btn-ghost">Lihat Paket Wisata</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="nav-logo">Jelajah Nusantara</div>
+      <p>Menyajikan pengalaman wisata terbaik Indonesia sejak 2015. Kami percaya setiap perjalanan adalah kisah baru yang menunggu untuk diceritakan.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Destinasi</h4>
+      <ul>
+        <li><a href="#">Bali</a></li>
+        <li><a href="#">Raja Ampat</a></li>
+        <li><a href="#">Yogyakarta</a></li>
+        <li><a href="#">Labuan Bajo</a></li>
+        <li><a href="#">Lombok</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Layanan</h4>
+      <ul>
+        <li><a href="#">Paket Wisata</a></li>
+        <li><a href="#">Wisata Budaya</a></li>
+        <li><a href="#">Petualangan Alam</a></li>
+        <li><a href="#">Bulan Madu</a></li>
+        <li><a href="#">Kuliner</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Kontak</h4>
+      <ul>
+        <li><a href="#">+62 8722 8421 2</a></li>
+        <li><a href="#">info@jelajahnusantara.id</a></li>
+        <li><a href="#">Jl. Solo-Tawangmangu</a></li>
+        <li><a href="#">Instagram</a></li>
+        <li><a href="#">WhatsApp</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Jelajah Nusantara. Hak cipta dilindungi.</p>
+    <p>Bangga buatan Indonesia 🇮🇩</p>
+  </div>
+</footer>
+
+<script>
+  // Smooth reveal on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.dest-card, .exp-card, .gallery-item, .testi-card').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
